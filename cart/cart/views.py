@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse, StreamingHttpResponse
 from django.views.decorators import gzip
+
 from cart.bar_scan import VideoCamera
+
+# Models import 
+from cart_data.models import ScannedItem, ItemData
 
 def home_page(request):
     return render(request, "index.html")
@@ -29,8 +33,15 @@ def cameraView(request):
 def gen(request, camera, stat):
     
     while not stat:
-        frame, stat = camera.get_frame()
-        if stat:            
+        frame, stat, barcode_data = camera.get_frame()
+        if stat:
+            if ItemData.objects.filter(bar_data = barcode_data).exists():
+                # Add user later
+                db = ScannedItem(scanned_item = barcode_data)
+                db.save()
+            else:
+                db = ScannedItem(scanned_item = "Dont exists") 
+                db.save()
             return
         yield (b'--frame \r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')

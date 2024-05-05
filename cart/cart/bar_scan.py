@@ -11,7 +11,7 @@ class VideoCamera(object):
         _, self.frame = self.video.read()
         self.bar_scanned = False
 
-        self.scanned_otp = None    
+        self.barcode_data = None    
         self.coupon_status = None
 
         self.thread_flag = True
@@ -45,7 +45,7 @@ class VideoCamera(object):
             
 
 
-        return jpeg.tobytes(), self.bar_scanned 
+        return jpeg.tobytes(), self.bar_scanned, self.barcode_data
 
 
 
@@ -58,12 +58,12 @@ class VideoCamera(object):
         if barcodes:
             for barcode in barcodes:
                 # Get the barcode data and type
-                barcode_data = barcode.data.decode("utf-8")
-                barcode_type = barcode.type
-                print(f"Found {barcode_type} \n barcode: {barcode_data}")    
+                self.barcode_data = barcode.data.decode("utf-8")
+                self.barcode_type = barcode.type
+                print(f"Found {self.barcode_type} \n barcode: {self.barcode_data}")    
                 self.release_camera()
                 self.bar_scanned = True
-                return self.bar_scanned
+                return self.bar_scanned, self.barcode_data
     
     def update(self):
         try:
