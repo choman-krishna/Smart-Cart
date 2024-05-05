@@ -1,9 +1,61 @@
+{% load static %}
 {% include "header.html" %}
 <div>
-    <img src="/cameraOn/" id="qrImage" class="col-4 "
-    style="background-color: black; height: 20rem; margin-top: 10rem; margin-left: 2rem; height: 30rem;">    
-    
-        
+    <!-- <div>
+        <img src="/cameraOn/" id="qrImage" class="col-4 "
+        style="height: 20rem; margin-top: 10rem; margin-left: 2rem; height: 30rem;"> 
+    </div> -->
 
-    </div>
+    <div class="container">
+        <h1 class="fashion_taital">Man & Woman Fashion</h1>
+        <div class="fashion_section_2">
+           <div class="row">
+              <div class="col-lg-4 col-sm-4">
+                 <div class="box_main">
+                    <div class="tshirt_img"><img src="/cameraOn/" id="qrImage"  style="height: 28rem;"></div>
+                 </div>
+              </div>
+              <div class="col-lg-4 col-sm-4">
+                 <div class="box_main">
+                    <h4 class="shirt_text">Man -shirt</h4>
+                    <p class="price_text">Price  <span style="color: #262626;">$ 30</span></p>
+                    <div class="tshirt_img"><img src="{% static 'images/tshirt-img.png' %}"></div>
+                    <div class="btn_main">
+                       <div class="buy_bt"><a href="#">Buy Now</a></div>
+                       <div class="seemore_bt"><a href="#">See More</a></div>
+                    </div>
+                 </div>
+              </div>
+              <!-- <div class="col-lg-4 col-sm-4">
+                 <div class="box_main">
+                    <h4 class="shirt_text">Woman Scart</h4>
+                    <p class="price_text">Price  <span style="color: #262626;">$ 30</span></p>
+                    <div class="tshirt_img"><img src="images/women-clothes-img.png"></div>
+                    <div class="btn_main">
+                       <div class="buy_bt"><a href="#">Buy Now</a></div>
+                       <div class="seemore_bt"><a href="#">See More</a></div>
+                    </div>
+                 </div>
+              </div> -->
+           </div>
+        </div>
+     </div>
+
 </div>
+
+<script>
+    window.addEventListener("beforeunload", function(event){
+        $.ajax({
+                type : 'GET',
+                url: '/offCamera/',
+                data : {},
+                success: function(response)  {
+                  alert(response.res);
+                },
+                error : function (xhr, errmsg, err)  {
+                    console.error(response);
+                }
+            });
+        return ''
+    });
+</script>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, StreamingHttpResponse
+from django.http import JsonResponse, StreamingHttpResponse
 from django.views.decorators import gzip
 from cart.bar_scan import VideoCamera
 
@@ -34,3 +34,10 @@ def gen(request, camera, stat):
             return
         yield (b'--frame \r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+
+def offCamera(request):
+    global cam 
+    cam.release_camera()
+    return JsonResponse({"res" : "Camera Off"}) 

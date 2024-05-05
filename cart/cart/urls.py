@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home_page),
     path('camera/',views.camera),
-    path('cameraOn/',views.cameraView)
+    path('cameraOn/',views.cameraView),
+    path('offCamera/',views.offCamera)
 ]
