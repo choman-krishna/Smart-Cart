@@ -20,5 +20,7 @@ from cart import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home_page)
+    path('',views.home_page),
+    path('camera/',views.camera),
+    path('cameraOn/',views.cameraView)
 ]
