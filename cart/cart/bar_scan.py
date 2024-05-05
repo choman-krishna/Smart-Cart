@@ -34,7 +34,6 @@ class VideoCamera(object):
 
         # Qr Scanning Start
 
-        self.qr_data = ''
 
         
         self.bar_scanned = self.read_barcodes(self.frame)
@@ -46,7 +45,7 @@ class VideoCamera(object):
             
 
 
-        return jpeg.tobytes(), self.bar_scanned
+        return jpeg.tobytes(), self.bar_scanned 
 
 
 
