@@ -52,3 +52,31 @@ def offCamera(request):
     global cam 
     cam.release_camera()
     return JsonResponse({"res" : "Camera Off"}) 
+
+def updateScanned(request):
+    if request.method == "GET":
+        # Get the last scanned item from the database
+        scanned_db = ScannedItem.objects.last()
+
+        # Initialize default values
+        item_name = "Dont exists"
+        item_price = -999
+        item_image_url = ""
+
+        # If a scanned item exists in the database
+        if scanned_db and scanned_db.scanned_item != "Dont exists":
+            # Get item data from ItemData model based on the barcode
+            item_data = ItemData.objects.filter(bar_data=scanned_db.scanned_item).first()
+
+            if item_data:
+                item_name = item_data.item_name
+                item_price = item_data.prize
+                # Get the image URL
+                item_image_url = "../static"+ item_data.item_img.url
+
+        # Return JSON response
+        return JsonResponse({
+            "name": item_name,
+            "price": item_price,
+            "img": item_image_url
+        })

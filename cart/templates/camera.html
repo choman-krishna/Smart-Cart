@@ -17,9 +17,9 @@
               </div>
               <div class="col-lg-4 col-sm-4">
                  <div class="box_main">
-                    <h4 class="shirt_text">Man -shirt</h4>
-                    <p class="price_text">Price  <span style="color: #262626;">$ 30</span></p>
-                    <div class="tshirt_img"><img src="{% static 'images/tshirt-img.png' %}"></div>
+                    <h4 class="shirt_text" id="item_name"></h4>
+                    <p class="price_text">Price  <span id="price" style="color: #262626;">ddd</span></p>
+                    <div class="tshirt_img"><img src="../static/images/mobile-img.png" id="image_item"></div>
                     <div class="btn_main">
                        <div class="buy_bt"><a href="#">Buy Now</a></div>
                        <div class="seemore_bt"><a href="#">See More</a></div>
@@ -60,6 +60,31 @@
         return ''
     });
 
+
+    const item_name = document.getElementById("item_name")
+    const price = document.getElementById("price")
+    const image = document.getElementById("image_item")
+
+    function displayScannedItem(){
+        $.ajax({
+            type : 'GET',
+            url : '/updateScanned/',
+            success : function(response){
+                // add to inner html
+                console.log(response.name, response.img)
+                item_name.innerHTML = response.name;
+                price.innerHTML = response.price;
+                image.src = response.img;
+
+            },
+            error : function (xhr, errmsg, err)  {
+                console.error(response);
+            }
+
+        });
+    }
+
+    setInterval(displayScannedItem, 2000);
 
 
 </script>

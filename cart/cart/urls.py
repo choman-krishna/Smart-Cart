@@ -23,5 +23,6 @@ urlpatterns = [
     path('',views.home_page),
     path('camera/',views.camera),
     path('cameraOn/',views.cameraView),
-    path('offCamera/',views.offCamera)
+    path('offCamera/',views.offCamera),
+    path('updateScanned/', views.updateScanned)
 ]
