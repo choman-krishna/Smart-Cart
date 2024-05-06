@@ -24,5 +24,6 @@ urlpatterns = [
     path('camera/',views.camera),
     path('cameraOn/',views.cameraView),
     path('offCamera/',views.offCamera),
-    path('updateScanned/', views.updateScanned)
+    path('updateScanned/', views.updateScanned),
+    path('addToCart/', views.addToCart)
 ]

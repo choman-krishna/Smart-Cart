@@ -80,3 +80,12 @@ def updateScanned(request):
             "price": item_price,
             "img": item_image_url
         })
+    
+def addToCart(request):
+    # Reconsider this logic 
+    scanned_db = ScannedItem.objects.last()
+    scanned_db.in_cart = True
+    scanned_db.save()
+    add_lst = list(ItemData.objects.filter(bar_data = scanned_db.scanned_item).values())
+    print(add_lst)
+    return JsonResponse(add_lst[0])

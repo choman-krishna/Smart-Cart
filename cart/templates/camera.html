@@ -7,7 +7,7 @@
     </div> -->
 
     <div class="container">
-        <h1 class="fashion_taital">Man & Woman Fashion</h1>
+        <h1 class="fashion_taital">Camera Section</h1>
         <div class="fashion_section_2">
            <div class="row">
               <div class="col-lg-4 col-sm-4">
@@ -19,24 +19,27 @@
                  <div class="box_main">
                     <h4 class="shirt_text" id="item_name"></h4>
                     <p class="price_text">Price  <span id="price" style="color: #262626;">ddd</span></p>
-                    <div class="tshirt_img"><img src="../static/images/mobile-img.png" id="image_item"></div>
+                    <div class="tshirt_img"><img src="" id="image_item"></div>
                     <div class="btn_main">
-                       <div class="buy_bt"><a href="#">Buy Now</a></div>
-                       <div class="seemore_bt"><a href="#">See More</a></div>
+                       <div class="buy_bt" id="add_to_cart"><a href="#">Buy Now</a></div>
+                       <!-- <div class="seemore_bt"><a href="#">See More</a></div> -->
                     </div>
                  </div>
               </div>
-              <!-- <div class="col-lg-4 col-sm-4">
+              <div class="col-lg-4 col-sm-4">
                  <div class="box_main">
-                    <h4 class="shirt_text">Woman Scart</h4>
-                    <p class="price_text">Price  <span style="color: #262626;">$ 30</span></p>
-                    <div class="tshirt_img"><img src="images/women-clothes-img.png"></div>
-                    <div class="btn_main">
+                    <h4 class="shirt_text">Total Amount</h4>
+                    <div id="item_section">
+                     <p class="price_text" > <span style="color: #262626;"> </span></p>
+                    </div>
+                    <p class="price_text" >Price  <span style="color: #262626;" id="total_price">  30</span></p>
+                    
+                    <!-- <div class="btn_main">
                        <div class="buy_bt"><a href="#">Buy Now</a></div>
                        <div class="seemore_bt"><a href="#">See More</a></div>
-                    </div>
+                    </div> -->
                  </div>
-              </div> -->
+              </div>
            </div>
         </div>
      </div>
@@ -71,10 +74,10 @@
             url : '/updateScanned/',
             success : function(response){
                 // add to inner html
-                console.log(response.name, response.img)
                 item_name.innerHTML = response.name;
                 price.innerHTML = response.price;
                 image.src = response.img;
+
 
             },
             error : function (xhr, errmsg, err)  {
@@ -82,9 +85,37 @@
             }
 
         });
-    }
+   }
 
-    setInterval(displayScannedItem, 2000);
+   setInterval(displayScannedItem, 2000);
+
+   const  add_to_cart = document.getElementById("add_to_cart");
+   const item_section = document.getElementById("item_section")
+   const total_price = document.getElementById("total_price")
+   var sum = 0
+
+   // Add a click event listener
+   add_to_cart.addEventListener("click", function() {
+      // Your click event handler code here
+      $.ajax({
+            type : 'GET',
+            url : '/addToCart/',
+            success : function(response){
+                // add to inner html
+                var htmlContent = "<p class=\"price_text\" >"+ response.item_name +" <span style=\"color: #262626;\">" + response.prize + "</span></p>"
+                sum += parseInt(response.prize)
+                console.log(response.item_name)
+                item_section.innerHTML += htmlContent
+                total_price.innerHTML = sum
+
+            },
+            error : function (xhr, errmsg, err)  {
+                console.error(response);
+            }
+
+        });
+      
+   });
 
 
 </script>
