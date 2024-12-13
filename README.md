@@ -21,7 +21,7 @@ Smart Cart is a Django-based application that simplifies the shopping experience
 - **Backend**: Django (Python framework)
 - **Barcode Scanning**: OpenCV and Pyzbar libraries
 - **Frontend**: HTML, CSS, JavaScript (via Django templates)
-- **Database**: SQLite (or any other Django-compatible database)
+- **Database**: SQLite 
 - **Libraries**:
   - OpenCV: For video capture and image processing.
   - Pyzbar: For barcode decoding.
